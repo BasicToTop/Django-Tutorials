@@ -15,3 +15,15 @@ def about(request):
     template_name = 'mainapp/about.html'
     context = {}
     return render(request, template_name, context)
+
+
+def table_view(request):
+    template_name = 'mainapp/table.html'
+    context = {}
+    return render(request, template_name, context)
+
+
+def form_view(request):
+    template_name = 'mainapp/form.html'
+    context = {}
+    return render(request, template_name, context)
