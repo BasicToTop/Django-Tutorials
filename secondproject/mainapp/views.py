@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # Create your views here.
 
 
@@ -24,6 +24,25 @@ def table_view(request):
 
 
 def form_view(request):
-    template_name = 'mainapp/form.html'
-    context = {}
-    return render(request, template_name, context)
+    print('request.method ', request.method)
+    if request.method == "GET":
+        print(request.method)
+        template_name = 'mainapp/form.html'
+        context = {}
+        return render(request, template_name, context)
+    if request.method == 'POST':
+        print(request.method)
+        print('Custer send the data:--')
+        # data = request.POST
+        fullname = request.POST.get('fullname')
+        email = request.POST.get('email')
+        dob = request.POST.get('dob')
+        phoneno = request.POST.get('phoneno')
+        customer_data = {
+            "fullname":fullname,
+            "email":email,
+            "dob":dob,
+            "phoneno":phoneno,
+        }
+        print("DATA : ",customer_data)
+        return redirect('form')
