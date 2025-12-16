@@ -1,0 +1,26 @@
+<html>
+{% load static %}
+<head>
+    <title>Form Example</title>
+    {#  connect  external css  #}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+<h4>Form Example</h4>
+</body>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <label>Full Name</label>
+        <input type="text" name = "fullname" value="" required><br><br>
+        <label>Email</label>
+        <input type="email" name = "email" value="" required><br><br>
+        <label>DOB</label>
+        <input type="date" name = "dob" value="" required><br><br>
+        <label>Phone No.</label>
+        <input type="number" name = "phoneno" value="" required><br><br>
+        
+        <input type="submit" name="submit" value="Submit"> 
+    </form>
+</html>

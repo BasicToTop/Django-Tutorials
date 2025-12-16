@@ -1,12 +1,16 @@
 <html>
-
+{% load static %}
 <head>
     <title>Developed By BasicToTop</title>
+
+    {#  connect  external css  #}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
-<body style='background:lightblue;'>
+<body>
 
-    <center><h1 style='color:red;'><span style='margin-left:65%;'>Welcome to the Home Page</span></h1></center>
+    <center><h1><span style='margin-left:65%;'>Welcome to the Home Page</span></h1></center>
     <h2>This is developed by BasicToTop</h2>
     <h3>Learn Django Framework</h3>
     <h4>Subscribe BasicToTop YouTube Channel</h4>
@@ -15,6 +19,8 @@
     <p><strong>Trainer Name:</strong> <i>{{ trainer }}</i></p>
     <a href="https://www.basictotop.in" target="_blank">BasicToTop Website</a> || 
     <a href="/about"> Clicks to About Page </a>  || <a href="/testapp/test"> Clicks to About Page </a>
+    <a href="/table"> Clicks to Table Page </a>||
+    <a href="/form"> Clicks to form Page </a>||
 </body>
 
 
