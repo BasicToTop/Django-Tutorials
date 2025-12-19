@@ -9,28 +9,49 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Working with django form</title>
+    <title>Working with models</title>
   </head>
   <body>
-    <div class="jumbotron jumbotron-fluid">
-    <div class ="container">
-        <h1>Create the Student</h1><hr>
-    <h2>Working with django forms</h2>
-        <ol>
-            <li>Student Name : {{student_name}}</li>
-            <li>Student RollNo : {{student_rollno}}</li>
-            <li>Student Father Name : {{student_father_name}}</li>
-            <li>Student Mother Name : {{student_mother_name}}</li>
-            <li>Student Gender : {{student_gender}}</li>
-            <li>Student Email : {{student_email}}</li>
-        </ol>
-    <form method="POST" style='border:2px solid black; padding:10px; width:400px;'>
-        {% csrf_token %}
-         {{form}}
-   <button type="submit" class="btn btn-primary">Submit</button>
+    <h1>Welcome to Student List Page</h1><hr>
 
-    </form>
-</div>
+    <h5>Records:</h5>
+    {{records}}
+    <hr>
+    <h4>List of Students:</h4>
+    {%for data in records %}
+        <b>Student Name:</b> {{data.name}}<br>
+        <b>Student RollNo:</b> {{data.rollno}}<br>
+        <b>Student Father Name:</b> {{data.father_name}}<br>
+        <b>Student Mother Name:</b> {{data.mother_name}}<br>
+
+    {% endfor %}
+
+    <table class="table">
+    <thead>
+        <tr>
+        <th scope="col">Student id</th>
+        <th scope="col">Student Name</th>
+        <th scope="col">RollNo</th>
+        <th scope="col">Father Name</th>
+        <th scope="col">Mother Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in records %}
+        <tr>
+        <th scope="row">{{data.id}}</th>
+        <td>{{data.name}}</td>
+        <td>{{data.rollno}}</td>
+        <td>{{data.father_name}}</td>
+        <td>{{data.mother_name}}</td>
+        <td>{{data.gender}}</td>
+        <td>{{data.email}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->

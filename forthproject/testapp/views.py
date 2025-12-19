@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from testapp.forms import StudentForm
+from testapp.models import Student
 # Create your views here.
 
 
@@ -35,11 +36,36 @@ def student_create(request):
             print('Student Gender:- ', student_gender)
             print('Student Email:- ', student_email)
 
+            obj = Student(name=student_name, rollno=student_rollno,
+                          father_name=student_father_name, mother_name=student_mother_name,
+                          gender=student_gender, email=student_email)
+            obj.save()
+
             template_name = 'student_create.html'
-            context = {'form':form, 'student_name': student_name, 'student_rollno': student_rollno, 'student_father_name': student_father_name, 'student_mother_name': student_mother_name, 'student_gender': student_gender, 'student_email': student_email}
+            context = {'form': form, 'student_name': student_name, 'student_rollno': student_rollno, 'student_father_name': student_father_name,
+                       'student_mother_name': student_mother_name, 'student_gender': student_gender, 'student_email': student_email}
 
             return render(request, template_name, context)
         else:
             print('Form Errors:- ', form.errors)
 
         # form = StudentForm(request.POST)
+
+
+def student_list(request):
+    if request.method == 'GET':
+        print('student list')
+        records = Student.objects.all()
+        print('records:', records)
+        for data in records:
+            print("Student Name:", data.name)
+            print("Student RollNo:", data.rollno)   
+            print("Student Father Name:", data.father_name)
+            print("Student Mother Name:", data.mother_name)
+            print("Student  Gender:", data.gender)
+            print("Student Email:", data.email)
+            print('*'*30)
+            
+        template_name = 'student_list.html'
+        context = {'records': records}
+        return render(request, template_name, context)
