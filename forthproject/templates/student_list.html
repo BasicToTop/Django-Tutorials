@@ -12,22 +12,13 @@
     <title>Working with models</title>
   </head>
   <body>
-    <h1>Welcome to Student List Page</h1><hr>
-
-    <h5>Records:</h5>
-    {{records}}
+    <div class="container">
+        <h1>Welcome to Student List Page</h1>
     <hr>
     <h4>List of Students:</h4>
-    {%for data in records %}
-        <b>Student Name:</b> {{data.name}}<br>
-        <b>Student RollNo:</b> {{data.rollno}}<br>
-        <b>Student Father Name:</b> {{data.father_name}}<br>
-        <b>Student Mother Name:</b> {{data.mother_name}}<br>
-
-    {% endfor %}
-
+    <a href="{% url 'student_create' %}">Add New Student</a>
     <table class="table">
-    <thead>
+    <thead class="thead-dark">
         <tr>
         <th scope="col">Student id</th>
         <th scope="col">Student Name</th>
@@ -52,6 +43,7 @@
         {% endfor %}
     </tbody>
     </table>
+    </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from testapp.forms import StudentForm
 from testapp.models import Student
 # Create your views here.
@@ -40,6 +40,8 @@ def student_create(request):
                           father_name=student_father_name, mother_name=student_mother_name,
                           gender=student_gender, email=student_email)
             obj.save()
+
+            # return redirect('student_list')
 
             template_name = 'student_create.html'
             context = {'form': form, 'student_name': student_name, 'student_rollno': student_rollno, 'student_father_name': student_father_name,
