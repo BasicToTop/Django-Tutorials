@@ -41,13 +41,13 @@ def student_create(request):
                           gender=student_gender, email=student_email)
             obj.save()
 
-            # return redirect('student_list')
+            return redirect('student_list')
 
-            template_name = 'student_create.html'
-            context = {'form': form, 'student_name': student_name, 'student_rollno': student_rollno, 'student_father_name': student_father_name,
-                       'student_mother_name': student_mother_name, 'student_gender': student_gender, 'student_email': student_email}
+            # template_name = 'student_create.html'
+            # context = {'form': form, 'student_name': student_name, 'student_rollno': student_rollno, 'student_father_name': student_father_name,
+            #            'student_mother_name': student_mother_name, 'student_gender': student_gender, 'student_email': student_email}
 
-            return render(request, template_name, context)
+            # return render(request, template_name, context)
         else:
             print('Form Errors:- ', form.errors)
 
@@ -59,15 +59,28 @@ def student_list(request):
         print('student list')
         records = Student.objects.all()
         print('records:', records)
-        for data in records:
-            print("Student Name:", data.name)
-            print("Student RollNo:", data.rollno)   
-            print("Student Father Name:", data.father_name)
-            print("Student Mother Name:", data.mother_name)
-            print("Student  Gender:", data.gender)
-            print("Student Email:", data.email)
-            print('*'*30)
-            
+        # for data in records:
+        #     print("Student Name:", data.name)
+        #     print("Student RollNo:", data.rollno)
+        #     print("Student Father Name:", data.father_name)
+        #     print("Student Mother Name:", data.mother_name)
+        #     print("Student  Gender:", data.gender)
+        #     print("Student Email:", data.email)
+        #     print('*'*30)
+
         template_name = 'student_list.html'
         context = {'records': records}
         return render(request, template_name, context)
+
+
+def student_delete(request, record_id):
+    if request.method == 'GET':
+        print('#'*30)
+        print('Reqeust for delete student record id:', record_id)
+
+        # is it responbile to fetch record based on id
+        record = Student.objects.get(id=record_id)
+        print('Record to be deleted:', record.name)
+        print('*'*30)
+        record.delete()  # deleting the record
+        return redirect('student_list')

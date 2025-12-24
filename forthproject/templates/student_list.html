@@ -20,25 +20,31 @@
     <table class="table">
     <thead class="thead-dark">
         <tr>
-        <th scope="col">Student id</th>
+        <th scope="col">S.NO.</th>
+        <th scope="col">Id</th>
         <th scope="col">Student Name</th>
         <th scope="col">RollNo</th>
         <th scope="col">Father Name</th>
         <th scope="col">Mother Name</th>
         <th scope="col">Gender</th>
         <th scope="col">Email</th>
+        <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
         {% for data in records %}
         <tr>
-        <th scope="row">{{data.id}}</th>
+        <th scope="row">#{{forloop.counter}}.</th>
+        <th >{{data.id}}</th>
         <td>{{data.name}}</td>
         <td>{{data.rollno}}</td>
         <td>{{data.father_name}}</td>
         <td>{{data.mother_name}}</td>
         <td>{{data.gender}}</td>
         <td>{{data.email}}</td>
+        <td>
+          <a href="/student-delete/{{data.id}}/" class="btn btn-danger">Delete</a>
+        </td>
         </tr>
         {% endfor %}
     </tbody>
