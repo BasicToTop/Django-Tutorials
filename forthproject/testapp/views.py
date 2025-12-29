@@ -84,3 +84,49 @@ def student_delete(request, record_id):
         print('*'*30)
         record.delete()  # deleting the record
         return redirect('student_list')
+
+
+def student_update(request, record_id):
+    if request.method == 'GET':
+        print('Request for update student record id:', record_id)
+        record = Student.objects.get(id=record_id)
+        name = record.name
+        rollno = record.rollno
+        father_name = record.father_name
+        mother_name = record.mother_name
+        email = record.email
+        gender = record.gender
+        print('name:', name)
+        print('rollno:', rollno)
+        print('father_name:', father_name)
+        print('mother_name:', mother_name)
+        print('email:', email)
+        print('gender:', gender)
+        form = StudentForm(initial={'name': name, 'rollno': rollno,
+                                    'father_name': father_name,
+                                    'mother_name': mother_name,
+                                    'email': email, 'gender': gender})
+        template_name = 'student_update.html'
+        context = {'form': form}
+        return render(request, template_name, context)
+    elif request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            student_name = form.cleaned_data['name']
+            student_rollno = form.cleaned_data['rollno']
+            student_father_name = form.cleaned_data['father_name']
+            student_mother_name = form.cleaned_data['mother_name']
+            student_gender = form.cleaned_data['gender']
+            student_email = form.cleaned_data['email']
+
+            record = Student.objects.get(id=record_id)
+
+            record.name = student_name
+            record.rollno = student_rollno
+            record.father_name = student_father_name
+            record.mother_name = student_mother_name
+            record.gender = student_gender
+            record.email = student_email
+            record.save()
+
+            return redirect('student_list')

@@ -1,5 +1,4 @@
 <!doctype html>
-{% load static %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -9,48 +8,28 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Working with models</title>
+    <title>Emplooyee Registration</title>
   </head>
   <body>
-    <div class="container">
-        <h1>Welcome to Student List Page</h1>
-    <hr>
-    <h4>List of Students:</h4>
-    <a href="{% url 'student_create' %}">Add New Student</a>
-    <table class="table">
-    <thead class="thead-dark">
-        <tr>
-        <th scope="col">S.NO.</th>
-        <th scope="col">Id</th>
-        <th scope="col">Student Name</th>
-        <th scope="col">RollNo</th>
-        <th scope="col">Father Name</th>
-        <th scope="col">Mother Name</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Email</th>
-        <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for data in records %}
-        <tr>
-        <th scope="row">#{{forloop.counter}}.</th>
-        <th >{{data.id}}</th>
-        <td>{{data.name}}</td>
-        <td>{{data.rollno}}</td>
-        <td>{{data.father_name}}</td>
-        <td>{{data.mother_name}}</td>
-        <td>{{data.gender}}</td>
-        <td>{{data.email}}</td>
-        <td>
-          <a href="/student-update/{{data.id}}/" class="btn btn-primary">Update</a>
-          <a href="/student-delete/{{data.id}}/" class="btn btn-danger">Delete</a>
-        </td>
-        </tr>
+    <div class='container'>
+        <h1>Register New Employee...!!!!</h1>
+
+    <form method='POST'>
+        {% csrf_token %}
+        <div class="row">
+            {% for fm in form %}
+            <div class='col-lg-4 col-sm-6 col-12' >
+            <label>{{fm.label}}</label><br>
+            {{fm}}
+            </div>
         {% endfor %}
-    </tbody>
-    </table>
+        </div>
+        <br>
+<button type='submit' class='btn btn-primary'>Submit</button>
+    </form>
+
     </div>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->

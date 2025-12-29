@@ -3,6 +3,8 @@ from django import forms
 
 
 class StudentForm(forms.Form):
+
+    """ Django Normal Form """
     # fields according to the model
     name = forms.CharField(max_length=100)
     rollno = forms.IntegerField()
@@ -17,3 +19,6 @@ class StudentForm(forms.Form):
 <input type="text" name="name" maxlength="100" required id="id_name">
 
 """
+
+
+# Djanog Model Based Form..
