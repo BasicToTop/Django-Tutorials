@@ -12,6 +12,9 @@ class Country(models.Model):
     country_name = models.CharField(max_length=50, unique=True)
     description = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return self.country_name
+
 
 class State(models.Model):
     '''
