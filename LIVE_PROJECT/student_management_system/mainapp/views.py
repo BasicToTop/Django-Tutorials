@@ -3,6 +3,10 @@ from mainapp.forms import CountryForm, StateForm, GenderForm, QualificationForm,
 # Create your views here.
 
 
+def home(request):
+    return render(request, 'mainapp/home.html', context={})
+
+
 def country(request):
     if request.method == 'GET':
         # write the logic to display the form for clients
@@ -43,102 +47,81 @@ def state(request):
             return render(request, template_name, context)
 
 
-def country(request):
+def qualification(request):
     if request.method == 'GET':
         # write the logic to display the form for clients
-        form = CountryForm()
-        template_name = 'mainapp/country.html'
+        form = QualificationForm()
+        template_name = 'mainapp/qualification.html'
         context = {'form': form}
         return render(request, template_name, context)
 
     elif request.method == 'POST':
         # write the logic to get the form data from clients and validate then save into database table.
-        form = CountryForm(request.POST)
+        form = QualificationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('country')
+            return redirect('qualification')
         else:
-            template_name = 'mainapp/country.html'
+            template_name = 'mainapp/qualification.html'
             context = {'form': form}
             return render(request, template_name, context)
 
 
-def country(request):
+def gender(request):
     if request.method == 'GET':
         # write the logic to display the form for clients
-        form = CountryForm()
-        template_name = 'mainapp/country.html'
+        form = GenderForm()
+        template_name = 'mainapp/gender.html'
         context = {'form': form}
         return render(request, template_name, context)
 
     elif request.method == 'POST':
         # write the logic to get the form data from clients and validate then save into database table.
-        form = CountryForm(request.POST)
+        form = GenderForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('country')
+            return redirect('gender')
         else:
-            template_name = 'mainapp/country.html'
+            template_name = 'mainapp/gender.html'
             context = {'form': form}
             return render(request, template_name, context)
 
 
-def country(request):
+def university(request):
     if request.method == 'GET':
         # write the logic to display the form for clients
-        form = CountryForm()
-        template_name = 'mainapp/country.html'
+        form = UniversityForm()
+        template_name = 'mainapp/university.html'
         context = {'form': form}
         return render(request, template_name, context)
 
     elif request.method == 'POST':
         # write the logic to get the form data from clients and validate then save into database table.
-        form = CountryForm(request.POST)
+        form = UniversityForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('country')
+            return redirect('university')
         else:
-            template_name = 'mainapp/country.html'
+            template_name = 'mainapp/university.html'
             context = {'form': form}
             return render(request, template_name, context)
 
 
-def country(request):
+def student(request):
     if request.method == 'GET':
         # write the logic to display the form for clients
-        form = CountryForm()
-        template_name = 'mainapp/country.html'
+        form = StudentForm()
+        template_name = 'mainapp/student.html'
         context = {'form': form}
         return render(request, template_name, context)
 
     elif request.method == 'POST':
         # write the logic to get the form data from clients and validate then save into database table.
-        form = CountryForm(request.POST)
+        form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('country')
+            return redirect('student')
         else:
-            template_name = 'mainapp/country.html'
+            template_name = 'mainapp/student.html'
             context = {'form': form}
             return render(request, template_name, context)
-
-
-def country(request):
-    if request.method == 'GET':
-        # write the logic to display the form for clients
-        form = CountryForm()
-        template_name = 'mainapp/country.html'
-        context = {'form': form}
-        return render(request, template_name, context)
-
-    elif request.method == 'POST':
-        # write the logic to get the form data from clients and validate then save into database table.
-        form = CountryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('country')
-        else:
-            template_name = 'mainapp/country.html'
-            context = {'form': form}
-            return render(request, template_name, context)
-
