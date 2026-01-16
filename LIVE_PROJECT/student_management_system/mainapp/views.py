@@ -1,10 +1,32 @@
 from django.shortcuts import render, redirect
 from mainapp.forms import CountryForm, StateForm, GenderForm, QualificationForm, UniversityForm, StudentForm
+from mainapp.models import Country, Gender, Qualification, State, Student, University
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'mainapp/home.html', context={})
+    country_count = Country.objects.all().count()
+    state_count = State.objects.all().count()
+    qualification_count = Qualification.objects.all().count()
+    gender_count = Gender.objects.all().count()
+    university_count = University.objects.all().count()
+    student_count = Student.objects.all().count()
+    print('country_count ', country_count)
+    print('state_count ', state_count)
+    print('qualification_count ', qualification_count)
+    context = {'country_count': country_count, 'state_count': state_count,
+               'qualification_count': qualification_count,
+               'gender_count': gender_count,
+               'university_count': university_count,
+               'student_count': student_count}
+    return render(request, 'mainapp/home.html', context)
+
+
+def country_list(request):
+    countries = Country.objects.all()
+    context = {'countries': countries}
+    template_name = 'mainapp/country_list.html'
+    return render(request, template_name, context)
 
 
 def country(request):
@@ -20,7 +42,7 @@ def country(request):
         form = CountryForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('country')
+            return redirect('country_list')
         else:
             template_name = 'mainapp/country.html'
             context = {'form': form}
