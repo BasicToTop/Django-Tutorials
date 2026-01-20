@@ -1,0 +1,41 @@
+{% extends "mainapp/base.html" %}
+{% block body_block %}
+
+<div style="margin-top: 2rem;">
+    <h4 style="color: var(--primary); margin-bottom: 1.5rem; font-weight: 700;">
+        Students List
+    </h4>
+
+    <a href="{% url 'student' %}" class="btn btn-primary" style="margin-left: 85%;">
+        Add New Student
+    </a><br><br>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>University</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in students %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ s.rollno }}</td>
+                <td>{{ s.first_name }} {{ s.last_name }}</td>
+                <td>{{ s.university_college_name.uc_name }}</td>
+                <td>
+                    <a href="{% url 'student_edit' s.pk %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'student_delete' s.pk %}" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'student_detail' s.pk %}" class="btn btn-info">Details</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "mainapp/base.html" %}
+{% block body_block %}
+
+<h2>Student Details</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Column Name</th>
+            <th>Column Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Roll No</td>
+            <td>{{ student.rollno }}</td>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td>{{ student.first_name }}</td>
+        </tr>
+        <tr>
+            <td>Middle Name</td>
+            <td>{{ student.middle_name }}</td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td>{{ student.last_name }}</td>
+        </tr>
+        <tr>
+            <td>University</td>
+            <td>{{ student.university_college_name.uc_name }}</td>
+        </tr>
+        <tr>
+            <td>Father Name</td>
+            <td>{{ student.father_name }}</td>
+        </tr>
+        <tr>
+            <td>Mother Name</td>
+            <td>{{ student.mother_name }}</td>
+        </tr>
+        <tr>
+            <td>State</td>
+            <td>{{ student.state }}</td>
+        </tr>
+        <tr>
+            <td>Country</td>
+            <td>{{ student.country }}</td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+            <td>{{ student.dob }}</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>{{ student.Gender }}</td>
+        </tr>
+        <tr>
+            <td>Qualification</td>
+            <td>{{ student.qualification }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<a href="{% url 'student_list' %}" class="btn btn-secondary">
+    Back to Student List
+</a>
+
+{% endblock %}

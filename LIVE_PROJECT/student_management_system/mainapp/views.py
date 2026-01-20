@@ -80,101 +80,297 @@ def country_detail(request, pk):
     return render(request, template_name, context)
 
 
+# ================= STATE VIEWS =================
+
+def state_list(request):
+    states = State.objects.all().order_by('state_name')
+    context = {'states': states}
+    template_name = 'mainapp/state_list.html'
+    return render(request, template_name, context)
+
+
 def state(request):
     if request.method == 'GET':
-        # write the logic to display the form for clients
         form = StateForm()
         template_name = 'mainapp/state.html'
         context = {'form': form}
         return render(request, template_name, context)
 
     elif request.method == 'POST':
-        # write the logic to get the form data from clients and validate then save into database table.
         form = StateForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('state')
+            return redirect('state_list')
         else:
             template_name = 'mainapp/state.html'
             context = {'form': form}
             return render(request, template_name, context)
 
 
+def state_delete(request, pk):
+    state = State.objects.get(pk=pk)
+    state.delete()
+    return redirect('state_list')
+
+
+def state_edit(request, pk):
+    state = State.objects.get(pk=pk)
+    if request.method == 'GET':
+        form = StateForm(instance=state)
+        template_name = 'mainapp/state.html'
+        context = {'form': form}
+        return render(request, template_name, context)
+
+    elif request.method == 'POST':
+        form = StateForm(request.POST, instance=state)
+        if form.is_valid():
+            form.save()
+            return redirect('state_list')
+        else:
+            template_name = 'mainapp/state.html'
+            context = {'form': form}
+            return render(request, template_name, context)
+
+
+def state_detail(request, pk):
+    state = State.objects.get(pk=pk)
+    context = {'state': state}
+    template_name = 'mainapp/state_detail.html'
+    return render(request, template_name, context)
+# ================= END STATE VIEWS =================
+
+# ================= QUALIFICATION VIEWS =================
+
+
+def qualification_list(request):
+    qualifications = Qualification.objects.all().order_by('name')
+    context = {'qualifications': qualifications}
+    template_name = 'mainapp/qualification_list.html'
+    return render(request, template_name, context)
+
+
 def qualification(request):
     if request.method == 'GET':
-        # write the logic to display the form for clients
         form = QualificationForm()
         template_name = 'mainapp/qualification.html'
         context = {'form': form}
         return render(request, template_name, context)
 
     elif request.method == 'POST':
-        # write the logic to get the form data from clients and validate then save into database table.
         form = QualificationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('qualification')
+            return redirect('qualification_list')
         else:
             template_name = 'mainapp/qualification.html'
             context = {'form': form}
             return render(request, template_name, context)
 
 
+def qualification_delete(request, pk):
+    qualification = Qualification.objects.get(pk=pk)
+    qualification.delete()
+    return redirect('qualification_list')
+
+
+def qualification_edit(request, pk):
+    qualification = Qualification.objects.get(pk=pk)
+    if request.method == 'GET':
+        form = QualificationForm(instance=qualification)
+        template_name = 'mainapp/qualification.html'
+        context = {'form': form}
+        return render(request, template_name, context)
+
+    elif request.method == 'POST':
+        form = QualificationForm(request.POST, instance=qualification)
+        if form.is_valid():
+            form.save()
+            return redirect('qualification_list')
+        else:
+            template_name = 'mainapp/qualification.html'
+            context = {'form': form}
+            return render(request, template_name, context)
+
+
+def qualification_detail(request, pk):
+    qualification = Qualification.objects.get(pk=pk)
+    context = {'qualification': qualification}
+    template_name = 'mainapp/qualification_detail.html'
+    return render(request, template_name, context)
+
+# ================= GENDER VIEWS =================
+
+
+def gender_list(request):
+    genders = Gender.objects.all().order_by('name')
+    context = {'genders': genders}
+    template_name = 'mainapp/gender_list.html'
+    return render(request, template_name, context)
+
+
 def gender(request):
     if request.method == 'GET':
-        # write the logic to display the form for clients
         form = GenderForm()
         template_name = 'mainapp/gender.html'
         context = {'form': form}
         return render(request, template_name, context)
 
     elif request.method == 'POST':
-        # write the logic to get the form data from clients and validate then save into database table.
         form = GenderForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('gender')
+            return redirect('gender_list')
         else:
             template_name = 'mainapp/gender.html'
             context = {'form': form}
             return render(request, template_name, context)
 
 
+def gender_delete(request, pk):
+    gender = Gender.objects.get(pk=pk)
+    gender.delete()
+    return redirect('gender_list')
+
+
+def gender_edit(request, pk):
+    gender = Gender.objects.get(pk=pk)
+    if request.method == 'GET':
+        form = GenderForm(instance=gender)
+        template_name = 'mainapp/gender.html'
+        context = {'form': form}
+        return render(request, template_name, context)
+
+    elif request.method == 'POST':
+        form = GenderForm(request.POST, instance=gender)
+        if form.is_valid():
+            form.save()
+            return redirect('gender_list')
+        else:
+            template_name = 'mainapp/gender.html'
+            context = {'form': form}
+            return render(request, template_name, context)
+
+
+def gender_detail(request, pk):
+    gender = Gender.objects.get(pk=pk)
+    context = {'gender': gender}
+    template_name = 'mainapp/gender_detail.html'
+    return render(request, template_name, context)
+
+
+# ================= UNIVERSITY VIEWS =================
+
+def university_list(request):
+    universities = University.objects.all().order_by('uc_name')
+    context = {'universities': universities}
+    template_name = 'mainapp/university_list.html'
+    return render(request, template_name, context)
+
+
 def university(request):
     if request.method == 'GET':
-        # write the logic to display the form for clients
         form = UniversityForm()
         template_name = 'mainapp/university.html'
         context = {'form': form}
         return render(request, template_name, context)
 
     elif request.method == 'POST':
-        # write the logic to get the form data from clients and validate then save into database table.
         form = UniversityForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('university')
+            return redirect('university_list')
         else:
             template_name = 'mainapp/university.html'
             context = {'form': form}
             return render(request, template_name, context)
 
 
+def university_delete(request, pk):
+    university = University.objects.get(pk=pk)
+    university.delete()
+    return redirect('university_list')
+
+
+def university_edit(request, pk):
+    university = University.objects.get(pk=pk)
+    if request.method == 'GET':
+        form = UniversityForm(instance=university)
+        template_name = 'mainapp/university.html'
+        context = {'form': form}
+        return render(request, template_name, context)
+
+    elif request.method == 'POST':
+        form = UniversityForm(request.POST, instance=university)
+        if form.is_valid():
+            form.save()
+            return redirect('university_list')
+        else:
+            template_name = 'mainapp/university.html'
+            context = {'form': form}
+            return render(request, template_name, context)
+
+
+def university_detail(request, pk):
+    university = University.objects.get(pk=pk)
+    context = {'university': university}
+    template_name = 'mainapp/university_detail.html'
+    return render(request, template_name, context)
+
+
+# ================= STUDENT VIEWS =================
+
+def student_list(request):
+    students = Student.objects.all().order_by('first_name')
+    context = {'students': students}
+    template_name = 'mainapp/student_list.html'
+    return render(request, template_name, context)
+
+
 def student(request):
     if request.method == 'GET':
-        # write the logic to display the form for clients
         form = StudentForm()
         template_name = 'mainapp/student.html'
         context = {'form': form}
         return render(request, template_name, context)
 
     elif request.method == 'POST':
-        # write the logic to get the form data from clients and validate then save into database table.
         form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('student')
+            return redirect('student_list')
         else:
             template_name = 'mainapp/student.html'
             context = {'form': form}
             return render(request, template_name, context)
+
+
+def student_delete(request, pk):
+    student = Student.objects.get(pk=pk)
+    student.delete()
+    return redirect('student_list')
+
+
+def student_edit(request, pk):
+    student = Student.objects.get(pk=pk)
+    if request.method == 'GET':
+        form = StudentForm(instance=student)
+        template_name = 'mainapp/student.html'
+        context = {'form': form}
+        return render(request, template_name, context)
+
+    elif request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('student_list')
+        else:
+            template_name = 'mainapp/student.html'
+            context = {'form': form}
+            return render(request, template_name, context)
+
+
+def student_detail(request, pk):
+    student = Student.objects.get(pk=pk)
+    context = {'student': student}
+    template_name = 'mainapp/student_detail.html'
+    return render(request, template_name, context)

@@ -1,10 +1,13 @@
 {% extends "mainapp/base.html" %}
+{% load crispy_forms_tags %}
 {% block body_block %}
-        <form method = 'POST' action=''>
-            {% csrf_token %}
-            {{form}}
-            <button type='submit' name='submit'>Submit</button>
-        </form>
-        <script src="" async defer></script>
+    <h4 style="color: var(--primary); margin-bottom: 1.5rem; font-weight: 700;">University</h4>
 
-            {% endblock %}
+    <form method = 'POST' action=''>
+        {% csrf_token %}
+        {{form | crispy}}
+        <button type='submit' name='submit' class="btn btn-primary">Submit</button>
+    </form>
+    <script src="" async defer></script>
+
+{% endblock %}

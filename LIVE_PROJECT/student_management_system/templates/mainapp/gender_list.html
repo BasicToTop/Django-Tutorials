@@ -1,0 +1,37 @@
+{% extends "mainapp/base.html" %}
+{% block body_block %}
+
+<div style="margin-top: 2rem;">
+    <h4 style="color: var(--primary); margin-bottom: 1.5rem; font-weight: 700;">
+        Gender List
+    </h4>
+
+    <a href="{% url 'gender' %}" class="btn btn-primary" style="margin-left: 85%;">
+        Add New Gender
+    </a><br><br>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Gender</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for g in genders %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ g.name }}</td>
+                <td>
+                    <a href="{% url 'gender_edit' g.pk %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'gender_delete' g.pk %}" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'gender_detail' g.pk %}" class="btn btn-info">Details</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

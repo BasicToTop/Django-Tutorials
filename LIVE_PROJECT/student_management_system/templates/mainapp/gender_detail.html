@@ -1,0 +1,28 @@
+{% extends "mainapp/base.html" %}
+{% block body_block %}
+
+<h2>Gender Details</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Column Name</th>
+            <th>Column Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Gender</td>
+            <td>{{ gender.name }}</td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>{{ gender.description }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<a href="{% url 'gender_list' %}" class="btn btn-secondary">
+    Back to Gender List
+</a>
+
+{% endblock %}

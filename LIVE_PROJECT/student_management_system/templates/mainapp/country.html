@@ -1,10 +1,13 @@
 {% extends "mainapp/base.html" %}
+{% load crispy_forms_tags %}
+
 {% block body_block %}
 
-        
+    <h4 style="color: var(--primary); margin-bottom: 1.5rem; font-weight: 700;">Country</h4>
+
         <form method = 'POST' action=''>
             {% csrf_token %}
-            {{form}}
+            {{form | crispy}}
             <button type='submit' name='submit' class="btn btn-primary">Submit</button>
             <a href="{% url 'country_list' %}" class="btn btn-secondary">Back to Country List</a>
         </form>

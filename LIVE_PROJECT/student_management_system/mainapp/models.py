@@ -26,6 +26,9 @@ class State(models.Model):
     country_name = models.ForeignKey(Country, on_delete=models.CASCADE)
     description = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return self.state_name
+
 
 class Qualification(models.Model):
     '''
@@ -35,6 +38,9 @@ class Qualification(models.Model):
     name = models.CharField(max_length=50, unique=True)
     description = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Gender(models.Model):
     '''
@@ -43,6 +49,9 @@ class Gender(models.Model):
     '''
     name = models.CharField(max_length=15, unique=True)
     description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class University(models.Model):
@@ -58,6 +67,9 @@ class University(models.Model):
     state = models.ForeignKey(State, on_delete=models.CASCADE)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.uc_name
+
 
 class Student(models.Model):
     '''
@@ -72,8 +84,8 @@ class Student(models.Model):
         University, on_delete=models.CASCADE)
     father_name = models.CharField(max_length=50)
     mother_name = models.CharField(max_length=50)
-    state = models.CharField(max_length=50)
-    country = models.CharField(max_length=50)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
     dob = models.DateField()
-    Gender = models.CharField(max_length=50)
-    qualification = models.CharField(max_length=50)
+    Gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
+    qualification = models.ForeignKey(Qualification, on_delete=models.CASCADE)
