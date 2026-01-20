@@ -23,7 +23,7 @@ def home(request):
 
 
 def country_list(request):
-    countries = Country.objects.all()
+    countries = Country.objects.all().order_by('country_name')
     context = {'countries': countries}
     template_name = 'mainapp/country_list.html'
     return render(request, template_name, context)
@@ -47,6 +47,37 @@ def country(request):
             template_name = 'mainapp/country.html'
             context = {'form': form}
             return render(request, template_name, context)
+
+
+def country_delete(request, pk):
+    country = Country.objects.get(pk=pk)
+    country.delete()
+    return redirect('country_list')
+
+
+def country_edit(request, pk):
+    country = Country.objects.get(pk=pk)
+    if request.method == 'GET':
+        form = CountryForm(instance=country)
+        template_name = 'mainapp/country.html'
+        context = {'form': form}
+        return render(request, template_name, context)
+    elif request.method == 'POST':
+        form = CountryForm(request.POST, instance=country)
+        if form.is_valid():
+            form.save()
+            return redirect('country_list')
+        else:
+            template_name = 'mainapp/country.html'
+            context = {'form': form}
+            return render(request, template_name, context)
+
+
+def country_detail(request, pk):
+    country = Country.objects.get(pk=pk)
+    context = {'country': country}
+    template_name = 'mainapp/country_detail.html'
+    return render(request, template_name, context)
 
 
 def state(request):

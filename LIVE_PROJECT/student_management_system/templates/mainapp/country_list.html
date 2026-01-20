@@ -11,7 +11,6 @@
                             <th>S.No.</th>
                             <th>Country Code </th>
                             <th>Country Name</th>
-                            <th>description</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -21,10 +20,9 @@
                             <td>{{ forloop.counter }}</td>
                             <td>{{ country.country_code }}</td>
                             <td>{{ country.country_name }}</td>
-                            <td>{{ country.description }}</td>
-                            <td><a href="{% url 'country' %}" class="btn btn-primary">Edit</a>
-                                <a href="#" class="btn btn-danger">Delete</a>
-                                <a href="#" class="btn btn-info">Details</a>
+                            <td><a href="{% url 'country_edit' country.pk %}" class="btn btn-primary">Edit</a>
+                                <a href="{% url 'country_delete' country.pk %}" class="btn btn-danger">Delete</a>
+                                <a href="{% url 'country_detail' country.pk %}" class="btn btn-info">Details</a>
                             </td>
                         </tr>
                         {% endfor %}

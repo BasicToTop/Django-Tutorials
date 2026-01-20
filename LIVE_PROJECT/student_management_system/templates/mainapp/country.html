@@ -5,7 +5,8 @@
         <form method = 'POST' action=''>
             {% csrf_token %}
             {{form}}
-            <button type='submit' name='submit'>Submit</button>
+            <button type='submit' name='submit' class="btn btn-primary">Submit</button>
+            <a href="{% url 'country_list' %}" class="btn btn-secondary">Back to Country List</a>
         </form>
         <script src="" async defer></script>
     {% endblock %}
