@@ -24,6 +24,14 @@ def home(request):
 
 def country_list(request):
     countries = Country.objects.all().order_by('country_name')
+    print('countries ',countries)
+    print('Data is exists: ', countries.exists())
+    print('total no of countries ',countries.count())
+    for data in countries:
+        print('id: ',data.id)
+        print('country_code: ',data.country_code)
+        print('country_name: ',data.country_name)
+        print('*'*30)
     context = {'countries': countries}
     template_name = 'mainapp/country_list.html'
     return render(request, template_name, context)

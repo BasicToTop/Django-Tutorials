@@ -35,7 +35,7 @@ class Qualification(models.Model):
     Docstring for Qualification,
     Qualification models is responsible to handling the all kinds of Qualification
     '''
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50, unique=False)
     description = models.TextField(null=True, blank=True)
 
     def __str__(self):
