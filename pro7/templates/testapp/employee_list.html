@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1>Employee List</h1>
+        <form action="" method="GET">
+            {{form.as_p}}
+            <button type="submit" class="btn btn-primary">Search</button><br>
+            <a href = "{% url 'employee_list' %}">Clear Filters</a>
+        </form><br>
+        <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">S.NO.</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Middle Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Position</th>
+      <th scope="col">Salary</th>
+      <th scope="col">DOJ</th>
+      <th scope="col">Status</th>
+      <th scope="col">Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for data in employees %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ data.first_name }}</td>
+          <td>{{ data.middle_name }}</td>
+          <td>{{ data.last_name }}</td>
+          <td>{{ data.email }}</td>
+          <td>{{ data.phone_number }}</td>
+          <td>{{ data.position }}</td>
+          <td>{{ data.salary }}</td>
+          <td>{{ data.doj }}</td>
+          <td>{{ data.is_active }}</td>
+          <td>{{ data.created_at }}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+    </body>
+</html>
