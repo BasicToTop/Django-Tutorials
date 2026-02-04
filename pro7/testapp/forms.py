@@ -8,5 +8,7 @@ class EmployeeForm(forms.Form):
     # phone_number = forms.CharField(max_length=15, label='Phone Number')
     # position = forms.CharField(max_length=50, label='Position')
     # doj = forms.DateField(label='Date of Joining', widget=forms.SelectDateWidget)
-    # salary = forms.FloatField(label='Salary')
+    salary = forms.FloatField(label='Salary', required=False)
     # is_active = forms.BooleanField(required=False, initial=True, label='Is Active')
+    from_salary = forms.FloatField(label='From Salary', required=False)
+    to_salary = forms.FloatField(label='To Salary', required=False)
