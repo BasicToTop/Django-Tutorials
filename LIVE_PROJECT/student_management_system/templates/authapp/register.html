@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Register</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'mainapp/css/style.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container" style="max-width: 400px; margin-top: 5rem; padding: 2rem; border: 1px solid #ddd; border-radius: 8px;">
+    <h2 style="text-align: center; margin-bottom: 2rem; font-weight: 700;">Student Management System</h2>
+    <h4 style="color: var(--primary); margin-bottom: 1.5rem; font-weight: 700;">Register</h4>
+
+        <form method = 'POST' action=''>
+            {% csrf_token %}
+            {{form | crispy}}
+            <button type='submit' name='submit' class="btn btn-primary">Register</button>
+            <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+        </form><br>
+<h6 style="text-align: center; font-weight: 500;"> By BasicToTop</h6> 
+        </div>
+    </body>
+</html>

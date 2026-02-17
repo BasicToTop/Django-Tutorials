@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">    
+</head>
+    <body>
+
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <div class="container">
+  <a class="navbar-brand" href="#" style="color:white;">BasicToTop</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        {% if user.is_authenticated %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'dashboard' %}" style="color:white;">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}" style="color:white;">About</a>
+      </li>
+      {% endif %}
+      
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}" style="color:white;">Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}" style="color:white;">Login</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'user_registration' %}" style="color:white;">Registration</a>
+      </li>
+        {% endif %}
+      
+    </ul>
+  </div>
+</div>
+</nav>
+        <div class="container">
+            <h1> My Authenication & Authorization System </h1><hr>
+
+        {% block content %}
+        {% endblock %}
+
+        </div>  
+    </body>
+</html>

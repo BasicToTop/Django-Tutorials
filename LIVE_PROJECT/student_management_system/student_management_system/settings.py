@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'mainapp',  # our application name
+    'authapp',  # auth application name
 ]
 
 MIDDLEWARE = [

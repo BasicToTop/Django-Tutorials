@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from mainapp.forms import CountryForm, StateForm, GenderForm, QualificationForm, UniversityForm, StudentForm
 from mainapp.models import Country, Gender, Qualification, State, Student, University
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
 def home(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     country_count = Country.objects.all().count()
     state_count = State.objects.all().count()
     qualification_count = Qualification.objects.all().count()
@@ -23,20 +26,23 @@ def home(request):
 
 
 def country_list(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     countries = Country.objects.all().order_by('country_name')
-    print('countries ',countries)
+    print('countries ', countries)
     print('Data is exists: ', countries.exists())
-    print('total no of countries ',countries.count())
+    print('total no of countries ', countries.count())
     for data in countries:
-        print('id: ',data.id)
-        print('country_code: ',data.country_code)
-        print('country_name: ',data.country_name)
+        print('id: ', data.id)
+        print('country_code: ', data.country_code)
+        print('country_name: ', data.country_name)
         print('*'*30)
     context = {'countries': countries}
     template_name = 'mainapp/country_list.html'
     return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def country(request):
     if request.method == 'GET':
         # write the logic to display the form for clients
@@ -57,12 +63,14 @@ def country(request):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def country_delete(request, pk):
     country = Country.objects.get(pk=pk)
     country.delete()
     return redirect('country_list')
 
 
+@login_required(login_url='login')
 def country_edit(request, pk):
     country = Country.objects.get(pk=pk)
     if request.method == 'GET':
@@ -81,6 +89,7 @@ def country_edit(request, pk):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def country_detail(request, pk):
     country = Country.objects.get(pk=pk)
     context = {'country': country}
@@ -89,7 +98,7 @@ def country_detail(request, pk):
 
 
 # ================= STATE VIEWS =================
-
+@login_required(login_url='login')
 def state_list(request):
     states = State.objects.all().order_by('state_name')
     context = {'states': states}
@@ -97,6 +106,7 @@ def state_list(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def state(request):
     if request.method == 'GET':
         form = StateForm()
@@ -115,12 +125,14 @@ def state(request):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def state_delete(request, pk):
     state = State.objects.get(pk=pk)
     state.delete()
     return redirect('state_list')
 
 
+@login_required(login_url='login')
 def state_edit(request, pk):
     state = State.objects.get(pk=pk)
     if request.method == 'GET':
@@ -140,6 +152,7 @@ def state_edit(request, pk):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def state_detail(request, pk):
     state = State.objects.get(pk=pk)
     context = {'state': state}
@@ -150,6 +163,7 @@ def state_detail(request, pk):
 # ================= QUALIFICATION VIEWS =================
 
 
+@login_required(login_url='login')
 def qualification_list(request):
     qualifications = Qualification.objects.all().order_by('name')
     context = {'qualifications': qualifications}
@@ -157,6 +171,7 @@ def qualification_list(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def qualification(request):
     if request.method == 'GET':
         form = QualificationForm()
@@ -175,12 +190,14 @@ def qualification(request):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def qualification_delete(request, pk):
     qualification = Qualification.objects.get(pk=pk)
     qualification.delete()
     return redirect('qualification_list')
 
 
+@login_required(login_url='login')
 def qualification_edit(request, pk):
     qualification = Qualification.objects.get(pk=pk)
     if request.method == 'GET':
@@ -200,6 +217,7 @@ def qualification_edit(request, pk):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def qualification_detail(request, pk):
     qualification = Qualification.objects.get(pk=pk)
     context = {'qualification': qualification}
@@ -209,6 +227,7 @@ def qualification_detail(request, pk):
 # ================= GENDER VIEWS =================
 
 
+@login_required(login_url='login')
 def gender_list(request):
     genders = Gender.objects.all().order_by('name')
     context = {'genders': genders}
@@ -216,6 +235,7 @@ def gender_list(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def gender(request):
     if request.method == 'GET':
         form = GenderForm()
@@ -234,12 +254,14 @@ def gender(request):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def gender_delete(request, pk):
     gender = Gender.objects.get(pk=pk)
     gender.delete()
     return redirect('gender_list')
 
 
+@login_required(login_url='login')
 def gender_edit(request, pk):
     gender = Gender.objects.get(pk=pk)
     if request.method == 'GET':
@@ -259,6 +281,7 @@ def gender_edit(request, pk):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def gender_detail(request, pk):
     gender = Gender.objects.get(pk=pk)
     context = {'gender': gender}
@@ -267,7 +290,7 @@ def gender_detail(request, pk):
 
 
 # ================= UNIVERSITY VIEWS =================
-
+@login_required(login_url='login')
 def university_list(request):
     universities = University.objects.all().order_by('uc_name')
     context = {'universities': universities}
@@ -275,6 +298,7 @@ def university_list(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def university(request):
     if request.method == 'GET':
         form = UniversityForm()
@@ -293,12 +317,14 @@ def university(request):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def university_delete(request, pk):
     university = University.objects.get(pk=pk)
     university.delete()
     return redirect('university_list')
 
 
+@login_required(login_url='login')
 def university_edit(request, pk):
     university = University.objects.get(pk=pk)
     if request.method == 'GET':
@@ -318,6 +344,7 @@ def university_edit(request, pk):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def university_detail(request, pk):
     university = University.objects.get(pk=pk)
     context = {'university': university}
@@ -326,7 +353,7 @@ def university_detail(request, pk):
 
 
 # ================= STUDENT VIEWS =================
-
+@login_required(login_url='login')
 def student_list(request):
     students = Student.objects.all().order_by('first_name')
     context = {'students': students}
@@ -334,6 +361,7 @@ def student_list(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def student(request):
     if request.method == 'GET':
         form = StudentForm()
@@ -352,12 +380,14 @@ def student(request):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def student_delete(request, pk):
     student = Student.objects.get(pk=pk)
     student.delete()
     return redirect('student_list')
 
 
+@login_required(login_url='login')
 def student_edit(request, pk):
     student = Student.objects.get(pk=pk)
     if request.method == 'GET':
@@ -377,6 +407,7 @@ def student_edit(request, pk):
             return render(request, template_name, context)
 
 
+@login_required(login_url='login')
 def student_detail(request, pk):
     student = Student.objects.get(pk=pk)
     context = {'student': student}
