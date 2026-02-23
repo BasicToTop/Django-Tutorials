@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from testapp.models import Employee
-from testapp.forms import EmployeeForm
+from testapp.forms import EmployeeForm, EmployeeRegistrationForm
 from django.db.models import Q
 # Create your views here.
 
@@ -50,3 +50,41 @@ def employee_list(request):
     context = {'employees': records, 'form': form}
     template_name = 'testapp/employee_list.html'
     return render(request, template_name, context)
+
+from django.views import View
+from .forms import EmployeeRegistrationForm
+    
+class EmployeeRegistration(View):
+    
+    def get(self,request):
+        form = EmployeeRegistrationForm()
+        context = {'form': form}
+        template_name = 'testapp/employee_registration.html'
+        return render(request, template_name, context)
+    
+    def post(self,request):
+        form = EmployeeRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form = EmployeeRegistrationForm()
+        context = {'form': form}
+        template_name = 'testapp/employee_registration.html'
+        return render(request, template_name, context)
+    
+    def put(self,request, pk):
+        employee = Employee.objects.get(pk=pk)
+        form = EmployeeRegistrationForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
+            form = EmployeeRegistrationForm()
+        context = {'form': form}
+        template_name = 'testapp/employee_registration.html'
+        return render(request, template_name, context)
+    
+    def delete(self,request, pk):
+        employee = Employee.objects.get(pk=pk)
+        employee.delete()
+        form = EmployeeRegistrationForm()
+        context = {'form': form}
+        template_name = 'testapp/employee_registration.html'
+        return render(request, template_name, context)
